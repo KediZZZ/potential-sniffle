@@ -36,7 +36,6 @@ namespace AFUtility_UI01
             this.AnalysisName = new System.Windows.Forms.TextBox();
             this.Path = new System.Windows.Forms.TextBox();
             this.LAnalysisPath = new System.Windows.Forms.Label();
-            this.AnalysisRunningStatus = new System.Windows.Forms.TextBox();
             this.LAnalysisStatus = new System.Windows.Forms.Label();
             this.LSortBy = new System.Windows.Forms.Label();
             this.MaxCount = new System.Windows.Forms.TextBox();
@@ -106,6 +105,7 @@ namespace AFUtility_UI01
             this.imeModeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.form1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.comboBox_Status = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -170,14 +170,6 @@ namespace AFUtility_UI01
             this.LAnalysisPath.TabIndex = 4;
             this.LAnalysisPath.Text = "Path:";
             // 
-            // AnalysisRunningStatus
-            // 
-            this.AnalysisRunningStatus.Location = new System.Drawing.Point(115, 160);
-            this.AnalysisRunningStatus.Name = "AnalysisRunningStatus";
-            this.AnalysisRunningStatus.Size = new System.Drawing.Size(220, 25);
-            this.AnalysisRunningStatus.TabIndex = 7;
-            this.AnalysisRunningStatus.TextChanged += new System.EventHandler(this.AnalysisRunningStatus_Changed);
-            // 
             // LAnalysisStatus
             // 
             this.LAnalysisStatus.AutoSize = true;
@@ -239,6 +231,7 @@ namespace AFUtility_UI01
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBox_Status);
             this.groupBox1.Controls.Add(this.comboBox_SortBy);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
@@ -307,7 +300,6 @@ namespace AFUtility_UI01
             this.tabHome.Controls.Add(this.MaxCount);
             this.tabHome.Controls.Add(this.LMaxCount);
             this.tabHome.Controls.Add(this.LSortBy);
-            this.tabHome.Controls.Add(this.AnalysisRunningStatus);
             this.tabHome.Controls.Add(this.LAnalysisStatus);
             this.tabHome.Controls.Add(this.Path);
             this.tabHome.Controls.Add(this.LAnalysisPath);
@@ -728,6 +720,25 @@ namespace AFUtility_UI01
             // 
             this.form1BindingSource.DataSource = typeof(AFUtility_UI01.Form1);
             // 
+            // comboBox_Status
+            // 
+            this.comboBox_Status.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.comboBox_Status.FormattingEnabled = true;
+            this.comboBox_Status.ItemHeight = 17;
+            this.comboBox_Status.Items.AddRange(new object[] {
+            "Running",
+            "Stopped",
+            "Starting",
+            "Stopping",
+            "Error",
+            "Warning",
+            "Suspended"});
+            this.comboBox_Status.Location = new System.Drawing.Point(105, 80);
+            this.comboBox_Status.Name = "comboBox_Status";
+            this.comboBox_Status.Size = new System.Drawing.Size(220, 25);
+            this.comboBox_Status.TabIndex = 19;
+            this.comboBox_Status.SelectedValueChanged += new System.EventHandler(this.AnalysisRunningStatus_Changed);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -757,7 +768,6 @@ namespace AFUtility_UI01
         private System.Windows.Forms.TextBox AnalysisName;
         private System.Windows.Forms.TextBox Path;
         private System.Windows.Forms.Label LAnalysisPath;
-        private System.Windows.Forms.TextBox AnalysisRunningStatus;
         private System.Windows.Forms.Label LAnalysisStatus;
         private System.Windows.Forms.Label LSortBy;
         private System.Windows.Forms.TextBox MaxCount;
@@ -827,6 +837,7 @@ namespace AFUtility_UI01
         private System.Windows.Forms.DataGridViewTextBoxColumn imeModeDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource form1BindingSource1;
         private System.Windows.Forms.BindingSource form1BindingSource;
+        private System.Windows.Forms.ComboBox comboBox_Status;
     }
 }
 

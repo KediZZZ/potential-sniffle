@@ -37,7 +37,7 @@ namespace AFUtility_UI01
 
         private void AnalysisRunningStatus_Changed(object sender, EventArgs e)
         {
-            AnalysisQ.RunningStatus = AnalysisRunningStatus.Text;
+            AnalysisQ.RunningStatus = (string)comboBox_Status.SelectedItem;
         }
 
         private void SortBy_Changed(object sender, EventArgs e)
