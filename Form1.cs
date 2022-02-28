@@ -22,7 +22,7 @@ namespace AFUtility_UI01
 
         private void AFServerName_Changed(object sender, EventArgs e)
         {
-            connectionInfo.AFServerName = AFServerName.Text;
+            AnalysisQ.AFServerName = AFServerName.Text;
         }
 
         private void AnalysisName_Changed(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace AFUtility_UI01
         private void QueryRunTime(object sender, EventArgs e)
         {
             PISystems piSystems = new PISystems();
-            var piSystem = (new PISystems())[connectionInfo.AFServerName];
+            var piSystem = (new PISystems())[AnalysisQ.AFServerName];
             var analysisService = piSystem.AnalysisService;
             string querytext = $"name:'{AnalysisQ.AnalysisName}' path: '{AnalysisQ.Path}' status:in ('{AnalysisQ.RunningStatus}') sortBy: '{AnalysisQ.SortBy}' sortOrder: 'Desc' maxCount: {AnalysisQ.MaxCount}";
             string queryfields = "id name status lastLag lastTriggerTime"; //KD: to add more fields in the future
