@@ -18,5 +18,6 @@ namespace AFUtility_UI01
         static public string MaxCount { get; set; }
         static public string SortBy { get; set; }
         static public string query { get; set; }
+        static public string field { get; set; }
     }
 }

@@ -29,7 +29,6 @@ namespace AFUtility_UI01
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.LAFServer = new System.Windows.Forms.Label();
             this.AFServerName = new System.Windows.Forms.TextBox();
             this.LAnalysisName = new System.Windows.Forms.Label();
@@ -44,7 +43,6 @@ namespace AFUtility_UI01
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox_SortBy = new System.Windows.Forms.ComboBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button3 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
@@ -106,14 +104,19 @@ namespace AFUtility_UI01
             this.form1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.comboBox_Status = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.L_Query = new System.Windows.Forms.Label();
+            this.L_field = new System.Windows.Forms.Label();
+            this.QueryString = new System.Windows.Forms.TextBox();
+            this.FieldString = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.tabPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // LAFServer
@@ -263,15 +266,6 @@ namespace AFUtility_UI01
             this.comboBox_SortBy.DropDown += new System.EventHandler(this.SortBy_Changed);
             this.comboBox_SortBy.SelectedValueChanged += new System.EventHandler(this.SortBy_Changed);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(355, 98);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(293, 163);
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
-            // 
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
@@ -289,14 +283,14 @@ namespace AFUtility_UI01
             this.tabControl1.Location = new System.Drawing.Point(11, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(659, 356);
+            this.tabControl1.Size = new System.Drawing.Size(800, 356);
             this.tabControl1.TabIndex = 18;
             // 
             // tabHome
             // 
+            this.tabHome.Controls.Add(this.groupBox2);
             this.tabHome.Controls.Add(this.button2);
             this.tabHome.Controls.Add(this.button3);
-            this.tabHome.Controls.Add(this.pictureBox1);
             this.tabHome.Controls.Add(this.MaxCount);
             this.tabHome.Controls.Add(this.LMaxCount);
             this.tabHome.Controls.Add(this.LSortBy);
@@ -312,10 +306,11 @@ namespace AFUtility_UI01
             this.tabHome.Location = new System.Drawing.Point(4, 22);
             this.tabHome.Name = "tabHome";
             this.tabHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHome.Size = new System.Drawing.Size(651, 330);
+            this.tabHome.Size = new System.Drawing.Size(792, 330);
             this.tabHome.TabIndex = 0;
             this.tabHome.Text = "Home";
             this.tabHome.UseVisualStyleBackColor = true;
+            this.tabHome.TextChanged += new System.EventHandler(this.QueryEnter);
             // 
             // tabPreview
             // 
@@ -739,16 +734,66 @@ namespace AFUtility_UI01
             this.comboBox_Status.TabIndex = 19;
             this.comboBox_Status.SelectedValueChanged += new System.EventHandler(this.AnalysisRunningStatus_Changed);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.FieldString);
+            this.groupBox2.Controls.Add(this.QueryString);
+            this.groupBox2.Controls.Add(this.L_field);
+            this.groupBox2.Controls.Add(this.L_Query);
+            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox2.Location = new System.Drawing.Point(369, 80);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(403, 105);
+            this.groupBox2.TabIndex = 18;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Advance filter";
+            // 
+            // L_Query
+            // 
+            this.L_Query.AutoSize = true;
+            this.L_Query.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            this.L_Query.Location = new System.Drawing.Point(6, 30);
+            this.L_Query.Name = "L_Query";
+            this.L_Query.Size = new System.Drawing.Size(49, 17);
+            this.L_Query.TabIndex = 19;
+            this.L_Query.Text = "Query:";
+            // 
+            // L_field
+            // 
+            this.L_field.AutoSize = true;
+            this.L_field.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            this.L_field.Location = new System.Drawing.Point(6, 75);
+            this.L_field.Name = "L_field";
+            this.L_field.Size = new System.Drawing.Size(39, 17);
+            this.L_field.TabIndex = 20;
+            this.L_field.Text = "Field:";
+            // 
+            // QueryString
+            // 
+            this.QueryString.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.QueryString.Location = new System.Drawing.Point(61, 30);
+            this.QueryString.Name = "QueryString";
+            this.QueryString.Size = new System.Drawing.Size(336, 25);
+            this.QueryString.TabIndex = 21;
+            // 
+            // FieldString
+            // 
+            this.FieldString.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.FieldString.Location = new System.Drawing.Point(61, 72);
+            this.FieldString.Name = "FieldString";
+            this.FieldString.Size = new System.Drawing.Size(336, 25);
+            this.FieldString.TabIndex = 22;
+            this.FieldString.TextChanged += new System.EventHandler(this.FieldString_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 390);
+            this.ClientSize = new System.Drawing.Size(869, 407);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "AnalysisSearch";
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
             this.tabHome.PerformLayout();
@@ -756,6 +801,8 @@ namespace AFUtility_UI01
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -775,7 +822,6 @@ namespace AFUtility_UI01
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPreview;
@@ -838,6 +884,11 @@ namespace AFUtility_UI01
         private System.Windows.Forms.BindingSource form1BindingSource1;
         private System.Windows.Forms.BindingSource form1BindingSource;
         private System.Windows.Forms.ComboBox comboBox_Status;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox FieldString;
+        private System.Windows.Forms.TextBox QueryString;
+        private System.Windows.Forms.Label L_field;
+        private System.Windows.Forms.Label L_Query;
     }
 }
 

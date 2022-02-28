@@ -49,15 +49,25 @@ namespace AFUtility_UI01
         {
             AnalysisQ.MaxCount = MaxCount.Text;
         }
+        private void QueryEnter(object sender, EventArgs e)
+        {
+            AnalysisQ.query = QueryString.Text;
+        }
 
+        private void FieldString_TextChanged(object sender, EventArgs e)
+        {
+            AnalysisQ.field = FieldString.Text;
+        }
         private void QueryRunTime(object sender, EventArgs e)
         {
             PISystems piSystems = new PISystems();
             var piSystem = (new PISystems())[AnalysisQ.AFServerName];
             var analysisService = piSystem.AnalysisService;
-            string querytext = $"name:'{AnalysisQ.AnalysisName}' path: '{AnalysisQ.Path}' status:in ('{AnalysisQ.RunningStatus}') sortBy: '{AnalysisQ.SortBy}' sortOrder: 'Desc' maxCount: {AnalysisQ.MaxCount}";
-            string queryfields = "id name status lastLag lastTriggerTime"; //KD: to add more fields in the future
-            var resultsWithFactory = analysisService.QueryRuntimeInformation(querytext,queryfields,
+            // string querytext = $"name:'{AnalysisQ.AnalysisName}' path: '{AnalysisQ.Path}' status:in ('{AnalysisQ.RunningStatus}') sortBy: '{AnalysisQ.SortBy}' sortOrder: 'Desc' maxCount: {AnalysisQ.MaxCount}";
+            //string queryfields = "id name status lastLag lastTriggerTime"; //KD: to add more fields in the future
+            string q = AnalysisQ.query;
+            string f = AnalysisQ.field;
+            var resultsWithFactory = analysisService.QueryRuntimeInformation(q,f,
              (list) => new
                  {
                      id = (Guid)list[0],
@@ -78,9 +88,7 @@ namespace AFUtility_UI01
             MessageBox.Show(s);
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
+     
 
-        }
     }
 }
