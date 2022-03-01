@@ -111,6 +111,7 @@ namespace AFUtility_UI01
         }
         private void exportCSV_Click(object sender, EventArgs e)
         {
+            // Lee: the code below thanks to <Export DataGridView Data To CSV In C#> example, works like a charm
             if (tablequeryresults.Rows.Count > 0)
             {
                 SaveFileDialog sfd = new SaveFileDialog();
@@ -169,7 +170,31 @@ namespace AFUtility_UI01
         }
         private void Testconnection(object sender, EventArgs e)
         {
+            // Get the PISystems collection for the current user.
+            PISystems AFServers = new PISystems();
+            var AFServer = AFServers[AFServerName.Text];
 
+            // Simple connect.
+            AFServer.Connect();
+            MessageBox.Show(string.Format("Connected to {0}, test successful!", AFServer), "Results", MessageBoxButtons.OK);
+            AFServer.Disconnect();
+
+            // Connect and display a credential prompt dialog if current user login fails.
+            AFServer.Connect(true, null);
+            AFServer.Disconnect();
+
+            //Lee: exception has not tested yet
+            try
+            {
+                // Connect using a specified credential.
+                NetworkCredential credential = new NetworkCredential("guest", String.Empty);
+                AFServer.Connect(credential);
+            }
+            catch (Exception ex)
+            {
+                // Expected exception since credential needs a valid user name and password.
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
