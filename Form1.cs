@@ -59,7 +59,7 @@ namespace AFUtility_UI01
 
             if (AFServerName.Text.Trim() == string.Empty)
             {
-                MessageBox.Show("Please enter AFServer Name in the textbox");
+                MessageBox.Show("Please enter AFServer Name in the textbox!","Info", MessageBoxButtons.OK);
                 return; // return because we don't want to run normal code of buton click
             }
             else
@@ -172,7 +172,7 @@ namespace AFUtility_UI01
         {
             if (AFServerName.Text.Trim() == string.Empty)
             {
-                MessageBox.Show("Please enter AFServer Name in the textbox");
+                MessageBox.Show("Please enter AFServer Name in the textbox!","Info", MessageBoxButtons.OK);
                 return; // return because we don't want to run normal code of buton click
             }
             else
@@ -241,6 +241,11 @@ namespace AFUtility_UI01
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }

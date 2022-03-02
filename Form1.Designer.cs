@@ -29,6 +29,7 @@ namespace AFUtility_UI01
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.LAFServer = new System.Windows.Forms.Label();
             this.AFServerName = new System.Windows.Forms.TextBox();
             this.LAnalysisName = new System.Windows.Forms.Label();
@@ -52,6 +53,7 @@ namespace AFUtility_UI01
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.queryAFSearchbox = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabPreview = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.acceptButtonDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -114,7 +116,6 @@ namespace AFUtility_UI01
             this.form1BindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.form1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.programBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
@@ -381,6 +382,16 @@ namespace AFUtility_UI01
             this.queryAFSearchbox.Size = new System.Drawing.Size(309, 25);
             this.queryAFSearchbox.TabIndex = 19;
             this.queryAFSearchbox.TextChanged += new System.EventHandler(this.QueryAFSearch);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox2.Location = new System.Drawing.Point(378, 80);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(452, 105);
+            this.groupBox2.TabIndex = 19;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Advanced Filter";
             // 
             // tabPreview
             // 
@@ -805,24 +816,16 @@ namespace AFUtility_UI01
             // 
             this.programBindingSource1.DataSource = typeof(AFUtility_UI01.Program);
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox2.Location = new System.Drawing.Point(378, 80);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(452, 105);
-            this.groupBox2.TabIndex = 19;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Advanced Filter";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 541);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "AnalysisSearch";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
