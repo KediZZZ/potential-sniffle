@@ -52,7 +52,6 @@ namespace AFUtility_UI01
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.queryAFSearchbox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabPreview = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.acceptButtonDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -115,6 +114,7 @@ namespace AFUtility_UI01
             this.form1BindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.form1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.programBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabHome.SuspendLayout();
@@ -233,9 +233,9 @@ namespace AFUtility_UI01
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.button1.Location = new System.Drawing.Point(401, 223);
+            this.button1.Location = new System.Drawing.Point(378, 207);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(429, 28);
+            this.button1.Size = new System.Drawing.Size(452, 28);
             this.button1.TabIndex = 13;
             this.button1.Text = "Search";
             this.button1.UseVisualStyleBackColor = true;
@@ -313,7 +313,6 @@ namespace AFUtility_UI01
             this.tabHome.Controls.Add(this.label3);
             this.tabHome.Controls.Add(this.label2);
             this.tabHome.Controls.Add(this.queryAFSearchbox);
-            this.tabHome.Controls.Add(this.label1);
             this.tabHome.Controls.Add(this.exportCSV);
             this.tabHome.Controls.Add(this.button1);
             this.tabHome.Controls.Add(this.button3);
@@ -329,6 +328,7 @@ namespace AFUtility_UI01
             this.tabHome.Controls.Add(this.AFServerName);
             this.tabHome.Controls.Add(this.LAFServer);
             this.tabHome.Controls.Add(this.groupBox1);
+            this.tabHome.Controls.Add(this.groupBox2);
             this.tabHome.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabHome.Location = new System.Drawing.Point(4, 22);
             this.tabHome.Name = "tabHome";
@@ -349,7 +349,7 @@ namespace AFUtility_UI01
             // 
             // fieldsReturn
             // 
-            this.fieldsReturn.Location = new System.Drawing.Point(521, 138);
+            this.fieldsReturn.Location = new System.Drawing.Point(510, 138);
             this.fieldsReturn.Name = "fieldsReturn";
             this.fieldsReturn.Size = new System.Drawing.Size(309, 25);
             this.fieldsReturn.TabIndex = 22;
@@ -358,7 +358,7 @@ namespace AFUtility_UI01
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(398, 138);
+            this.label3.Location = new System.Drawing.Point(387, 138);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 17);
             this.label3.TabIndex = 21;
@@ -368,7 +368,7 @@ namespace AFUtility_UI01
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(398, 110);
+            this.label2.Location = new System.Drawing.Point(387, 110);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(117, 17);
             this.label2.TabIndex = 20;
@@ -376,21 +376,11 @@ namespace AFUtility_UI01
             // 
             // queryAFSearchbox
             // 
-            this.queryAFSearchbox.Location = new System.Drawing.Point(521, 107);
+            this.queryAFSearchbox.Location = new System.Drawing.Point(510, 107);
             this.queryAFSearchbox.Name = "queryAFSearchbox";
             this.queryAFSearchbox.Size = new System.Drawing.Size(309, 25);
             this.queryAFSearchbox.TabIndex = 19;
             this.queryAFSearchbox.TextChanged += new System.EventHandler(this.QueryAFSearch);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(398, 80);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 17);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Advanced Search";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // tabPreview
             // 
@@ -815,6 +805,16 @@ namespace AFUtility_UI01
             // 
             this.programBindingSource1.DataSource = typeof(AFUtility_UI01.Program);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox2.Location = new System.Drawing.Point(378, 80);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(452, 105);
+            this.groupBox2.TabIndex = 19;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Advanced Filter";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -918,7 +918,6 @@ namespace AFUtility_UI01
         private System.Windows.Forms.DataGridViewTextBoxColumn imeModeDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource form1BindingSource1;
         private System.Windows.Forms.BindingSource form1BindingSource;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox queryAFSearchbox;
@@ -929,6 +928,7 @@ namespace AFUtility_UI01
         private System.Windows.Forms.BindingSource programBindingSource2;
         private System.Windows.Forms.BindingSource programBindingSource1;
         private System.Windows.Forms.DataGridView tablequeryresults;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

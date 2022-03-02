@@ -25,7 +25,7 @@ namespace AFUtility_UI01
 
         private void AFServerName_Changed(object sender, EventArgs e)
         {
-            connectionInfo.AFServerName = AFServerName.Text;
+            AnalysisQ.AFServerName = AFServerName.Text;
         }
 
         private void AnalysisName_Changed(object sender, EventArgs e)
