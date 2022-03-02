@@ -170,30 +170,38 @@ namespace AFUtility_UI01
         }
         private void Testconnection(object sender, EventArgs e)
         {
-            // Get the PISystems collection for the current user.
-            PISystems AFServers = new PISystems();
-            var AFServer = AFServers[AFServerName.Text];
-
-            // Simple connect.
-            AFServer.Connect();
-            MessageBox.Show(string.Format("Connected to {0}, test successful!", AFServer), "Results", MessageBoxButtons.OK);
-            AFServer.Disconnect();
-
-            // Connect and display a credential prompt dialog if current user login fails.
-            AFServer.Connect(true, null);
-            AFServer.Disconnect();
-
-            //Lee: exception has not tested yet
-            try
+            if (AFServerName.Text.Trim() == string.Empty)
             {
-                // Connect using a specified credential.
-                NetworkCredential credential = new NetworkCredential("guest", String.Empty);
-                AFServer.Connect(credential);
+                MessageBox.Show("Please enter AFServer Name in the textbox");
+                return; // return because we don't want to run normal code of buton click
             }
-            catch (Exception ex)
+            else
             {
-                // Expected exception since credential needs a valid user name and password.
-                Console.WriteLine(ex.Message);
+                // Get the PISystems collection for the current user.
+                PISystems AFServers = new PISystems();
+                var AFServer = AFServers[AFServerName.Text];
+
+                //Lee: exception is not fully tested yet
+                try
+                {
+                    // Simple connect.
+                    AFServer.Connect();
+                    MessageBox.Show(string.Format("Connected to {0}, test successful!", AFServer), "Results", MessageBoxButtons.OK);
+                    AFServer.Disconnect();
+
+                    // Connect and display a credential prompt dialog if current user login fails.
+                    AFServer.Connect(true, null);
+                    AFServer.Disconnect();
+
+                    // Connect using a specified credential.
+                    //NetworkCredential credential = new NetworkCredential("guest", String.Empty);
+                    //AFServer.Connect(credential);
+                }
+                catch (Exception ex)
+                {
+                    // Expected exception since credential needs a valid user name and password.
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
