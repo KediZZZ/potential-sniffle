@@ -1,18 +1,12 @@
-﻿using System;
+﻿using OSIsoft.AF;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using OSIsoft.AF;
-using OSIsoft.AF.Analysis;
-using OSIsoft.AF.Time;
 using static OSIsoft.AF.Analysis.AFAnalysisService;
-using System.IO;
-using System.Net;
 
 namespace AFUtility_UI01
 {
@@ -46,6 +40,7 @@ namespace AFUtility_UI01
         private void SortBy_Changed(object sender, EventArgs e)
         {
             AnalysisQ.SortBy = (string)comboBox_SortBy.SelectedItem;
+            comboBox_SortBy.ForeColor = Color.Black;
         }
 
         private void MaxCount_TextChanged(object sender, EventArgs e)
@@ -57,56 +52,81 @@ namespace AFUtility_UI01
         {
             tablequeryresults.Rows.Clear();
 
+            PISystems AFServers = new PISystems();
+            var AFServer = AFServers[AnalysisQ.AFServerName];
+
             if (AFServerName.Text.Trim() == string.Empty)
             {
-                MessageBox.Show("Please enter AFServer Name in the textbox!","Info", MessageBoxButtons.OK);
-                return; // return because we don't want to run normal code of buton click
+                //Gary: 
+                AFServer = AFServers.DefaultPISystem;
+                AFServerName.Text = AFServer.Name;
+                MessageBox.Show("AF Server Name is empty. Default AF Server will be used: " + AFServerName.Text, "Info", MessageBoxButtons.OK);
+                //return; // return because we don't want to run normal code of button click
+            }
+
+            //Gary: originally is using "AFServerName.Text", changed it into "AnalysisQ.AFServerName"
+            //both are working fine, but since we have already assigned the text into variable, should be using it
+            var analysisService = AFServer.AnalysisService;
+
+
+            //Gary: just listing the options can be used in the "query":
+            //System.InvalidOperationException: 'Invalid query: Unsupported field 'XXX'. Only 'id, name, category, description,
+            //elementname, template, path, status, statusdetail, lastevaluationstatus, lastevaluationstatusdetail, lastlag, averagelag,
+            //lastelapsed, averageelapsed, lasttriggertime, averagetrigger, successcount, errorcount, skipcount, sortby, sortorder, maxcount' are supported..'
+
+            //Gary: radioButton are been used to select Basic or Advanced Filter
+            //we need to define the variables for query and fields outside the if-else
+            //as the Basic Filters cant specify the fields value, we need to define the fields with some default value
+            //might as well define the query with default value as well
+            var query = "status: 'Running', 'Error' lastLag:> 5000 maxCount: 5";
+            var fields = "name path lastLag lastTriggerTime id";
+
+            if (radioButton1.Checked)
+            {
+                query = "name: " + AnalysisName.Text + " path: " + Path.Text + " status: " + AnalysisRunningStatus.Text
+                    + " sortBy: " + AnalysisQ.SortBy + " MaxCount: " + MaxCount.Text;
             }
             else
             {
-                PISystems AFServers = new PISystems();
-                var AFServer = AFServers[AFServerName.Text];
-                var analysisService = AFServer.AnalysisService;
+                query = queryAFSearchbox.Text;  // "status: 'Running' maxCount:2";
+                fields = fieldsReturn.Text; // "path lastLag lastTriggerTime";
+            }
 
-                string query = queryAFSearchbox.Text;  // "status: 'Running' maxCount:2";
-                string fields = fieldsReturn.Text; // "path lastLag lastTriggerTime";
+            IEnumerable<IList<RuntimeFieldValue>> result = analysisService.QueryRuntimeInformation(query, fields);
 
-                IEnumerable<IList<RuntimeFieldValue>> result = analysisService.QueryRuntimeInformation(query, fields);
+            // For dataView table
+            List<string> fieldlist = fields.Split(' ').ToList();
+            int fieldcount = fieldlist.Count;
 
-                // For dataView table
-                List<string> fieldlist = fields.Split(' ').ToList();
-                int fieldcount = fieldlist.Count;
+            // Create an unbound DataGridView by declaring a column count.
+            tablequeryresults.ColumnCount = fieldcount;
+            tablequeryresults.ColumnHeadersVisible = true;
 
-                // Create an unbound DataGridView by declaring a column count.
-                tablequeryresults.ColumnCount = fieldcount;
-                tablequeryresults.ColumnHeadersVisible = true;
+            // Set the column header style.
+            DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
 
-                // Set the column header style.
-                DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
+            columnHeaderStyle.BackColor = Color.Beige;
+            columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
+            tablequeryresults.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
 
-                columnHeaderStyle.BackColor = Color.Beige;
-                columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
-                tablequeryresults.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+            // Populate the headers
+            for (int i = 0; i < fieldcount; i++)
+            {
+                tablequeryresults.Columns[i].Name = fieldlist[i];
+            }
 
-                // Populate the headers
-                for (int i = 0; i < fieldcount; i++)
+            // Populate the rows.
+            foreach (var ab in result)
+            {
+                List<string> listab = new List<string>();
+
+                for (int j = 0; j < ab.Count; j++)
                 {
-                    tablequeryresults.Columns[i].Name = fieldlist[i];
+                    listab.Add(ab[j]);
                 }
-
-                // Populate the rows.
-                foreach (var ab in result)
-                {
-                    List<string> listab = new List<string>();
-
-                    for (int j = 0; j < ab.Count; j++)
-                    {
-                        listab.Add(ab[j]);
-                    }
-                    // Original code but is hardcoded to 4 elements
-                    // string[] row = new string[] { ab[0], ab[1], ab[2], ab[3] };
-                    tablequeryresults.Rows.Add(listab.ToArray());
-                }
+                // Original code but is hardcoded to 4 elements
+                // string[] row = new string[] { ab[0], ab[1], ab[2], ab[3] };
+                tablequeryresults.Rows.Add(listab.ToArray());
             }
         }
         private void exportCSV_Click(object sender, EventArgs e)
@@ -172,7 +192,7 @@ namespace AFUtility_UI01
         {
             if (AFServerName.Text.Trim() == string.Empty)
             {
-                MessageBox.Show("Please enter AFServer Name in the textbox!","Info", MessageBoxButtons.OK);
+                MessageBox.Show("Please enter AFServer Name in the textbox!", "Info", MessageBoxButtons.OK);
                 return; // return because we don't want to run normal code of buton click
             }
             else
@@ -232,7 +252,10 @@ namespace AFUtility_UI01
 
         private void comboBox_SortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            //Gary this was empty, I'm thinking to delete this
+            //until I realized we can use this to trigger the ForeColor change
+            //its triggered when user press
+            //comboBox_SortBy.ForeColor = Color.Black;
         }
 
         private void QueryAFSearch(object sender, EventArgs e)
@@ -246,6 +269,121 @@ namespace AFUtility_UI01
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+            //Gary: when the form load, it immediately assigned our comboBox_SortBy with the index 0
+            comboBox_SortBy.SelectedIndex = 0;
+            //Gary: because of the above line, the DropDown trigger is also being triggered
+            //and so it will replace whatever the default properties with Black
+            //in order to override that added line below to change the color to Silver
+            //in this case the default ForeColor property dont matter
+            comboBox_SortBy.ForeColor = Color.Silver;
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AnalysisName_Enter(object sender, EventArgs e)
+        {
+            if (AnalysisName.Text == "'*'")
+            {
+                AnalysisName.Text = "";
+                AnalysisName.ForeColor = Color.Black;
+            }
+        }
+
+        private void AnalysisName_Leave(object sender, EventArgs e)
+        {
+            if (AnalysisName.Text == "")
+            {
+                AnalysisName.Text = "'*'";
+                AnalysisName.ForeColor = Color.Silver;
+            }
+        }
+
+        private void Path_Enter(object sender, EventArgs e)
+        {
+            if (Path.Text == "'*'")
+            {
+                Path.Text = "";
+                Path.ForeColor = Color.Black;
+            }
+        }
+
+        private void Path_Leave(object sender, EventArgs e)
+        {
+            if (Path.Text == "")
+            {
+                Path.Text = "'*'";
+                Path.ForeColor = Color.Silver;
+            }
+        }
+
+        private void AnalysisRunningStatus_Enter(object sender, EventArgs e)
+        {
+            if (AnalysisRunningStatus.Text == "in ('Running', 'Error')")
+            {
+                AnalysisRunningStatus.Text = "";
+                AnalysisRunningStatus.ForeColor = Color.Black;
+            }
+        }
+
+        private void AnalysisRunningStatus_Leave(object sender, EventArgs e)
+        {
+            if (AnalysisRunningStatus.Text == "")
+            {
+                AnalysisRunningStatus.Text = "in ('Running', 'Error')";
+                AnalysisRunningStatus.ForeColor = Color.Silver;
+            }
+        }
+
+        private void MaxCount_Enter(object sender, EventArgs e)
+        {
+            //Gary: even though the default value specify in the MaxCount.Text is simply 5 (as an int)
+            //I believed inheritently it add ToString() to it, hence it's been converted into String automatically
+            if (MaxCount.Text == "5")
+            {
+                MaxCount.Text = "";
+                MaxCount.ForeColor = Color.Black;
+            }
+        }
+
+        private void MaxCount_Leave(object sender, EventArgs e)
+        {
+            if (MaxCount.Text == "")
+            {
+                //Gary: Cannot implicitly convert type 'int' to 'string'
+                //hence ToString() is needed
+                MaxCount.Text = 5.ToString();
+                MaxCount.ForeColor = Color.Silver;
+            }
+        }
+
+        private void queryAFSearchbox_Enter(object sender, EventArgs e)
+        {
+            if (queryAFSearchbox.Text == "status: 'Running' lastLag:> 5000 maxCount: 5")
+            {
+                queryAFSearchbox.Text = "";
+                queryAFSearchbox.ForeColor = Color.Black;
+            }
+        }
+
+        private void queryAFSearchbox_Leave(object sender, EventArgs e)
+        {
+            if (queryAFSearchbox.Text == "")
+            {
+                queryAFSearchbox.Text = "status: 'Running' lastLag:> 5000 maxCount: 5";
+                queryAFSearchbox.ForeColor = Color.Silver;
+            }
+        }
+
+        private void fieldsReturn_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fieldsReturn_Leave(object sender, EventArgs e)
         {
 
         }

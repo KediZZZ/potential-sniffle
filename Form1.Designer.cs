@@ -44,10 +44,13 @@ namespace AFUtility_UI01
             this.button1 = new System.Windows.Forms.Button();
             this.exportCSV = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.comboBox_SortBy = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.tablequeryresults = new System.Windows.Forms.DataGridView();
             this.fieldsReturn = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -161,19 +164,28 @@ namespace AFUtility_UI01
             // 
             // AnalysisName
             // 
+            this.AnalysisName.BackColor = System.Drawing.SystemColors.Window;
+            this.AnalysisName.ForeColor = System.Drawing.Color.Silver;
             this.AnalysisName.Location = new System.Drawing.Point(115, 110);
             this.AnalysisName.Name = "AnalysisName";
             this.AnalysisName.Size = new System.Drawing.Size(220, 25);
             this.AnalysisName.TabIndex = 3;
+            this.AnalysisName.Text = "\'*\'";
             this.AnalysisName.TextChanged += new System.EventHandler(this.AnalysisName_Changed);
+            this.AnalysisName.Enter += new System.EventHandler(this.AnalysisName_Enter);
+            this.AnalysisName.Leave += new System.EventHandler(this.AnalysisName_Leave);
             // 
             // Path
             // 
+            this.Path.ForeColor = System.Drawing.Color.Silver;
             this.Path.Location = new System.Drawing.Point(115, 135);
             this.Path.Name = "Path";
             this.Path.Size = new System.Drawing.Size(220, 25);
             this.Path.TabIndex = 5;
+            this.Path.Text = "\'*\'";
             this.Path.TextChanged += new System.EventHandler(this.Path_Changed);
+            this.Path.Enter += new System.EventHandler(this.Path_Enter);
+            this.Path.Leave += new System.EventHandler(this.Path_Leave);
             // 
             // LAnalysisPath
             // 
@@ -187,11 +199,15 @@ namespace AFUtility_UI01
             // 
             // AnalysisRunningStatus
             // 
+            this.AnalysisRunningStatus.ForeColor = System.Drawing.Color.Silver;
             this.AnalysisRunningStatus.Location = new System.Drawing.Point(115, 160);
             this.AnalysisRunningStatus.Name = "AnalysisRunningStatus";
             this.AnalysisRunningStatus.Size = new System.Drawing.Size(220, 25);
             this.AnalysisRunningStatus.TabIndex = 7;
+            this.AnalysisRunningStatus.Text = "in (\'Running\', \'Error\')";
             this.AnalysisRunningStatus.TextChanged += new System.EventHandler(this.AnalysisRunningStatus_Changed);
+            this.AnalysisRunningStatus.Enter += new System.EventHandler(this.AnalysisRunningStatus_Enter);
+            this.AnalysisRunningStatus.Leave += new System.EventHandler(this.AnalysisRunningStatus_Leave);
             // 
             // LAnalysisStatus
             // 
@@ -215,11 +231,15 @@ namespace AFUtility_UI01
             // 
             // MaxCount
             // 
+            this.MaxCount.ForeColor = System.Drawing.Color.Silver;
             this.MaxCount.Location = new System.Drawing.Point(115, 210);
             this.MaxCount.Name = "MaxCount";
             this.MaxCount.Size = new System.Drawing.Size(220, 25);
             this.MaxCount.TabIndex = 11;
+            this.MaxCount.Text = "5";
             this.MaxCount.TextChanged += new System.EventHandler(this.MaxCount_TextChanged);
+            this.MaxCount.Enter += new System.EventHandler(this.MaxCount_Enter);
+            this.MaxCount.Leave += new System.EventHandler(this.MaxCount_Leave);
             // 
             // LMaxCount
             // 
@@ -255,6 +275,7 @@ namespace AFUtility_UI01
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.comboBox_SortBy);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.groupBox1.Location = new System.Drawing.Point(10, 80);
@@ -262,22 +283,33 @@ namespace AFUtility_UI01
             this.groupBox1.Size = new System.Drawing.Size(341, 171);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Analysis Filter";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(115, 73);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(110, 25);
+            this.radioButton2.TabIndex = 19;
+            this.radioButton2.Text = "Basic Filter";
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // comboBox_SortBy
             // 
             this.comboBox_SortBy.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.comboBox_SortBy.ForeColor = System.Drawing.Color.Black;
             this.comboBox_SortBy.FormattingEnabled = true;
             this.comboBox_SortBy.Items.AddRange(new object[] {
-            "lastLag",
-            "averageLag",
-            "lastElapsed",
-            "averageElapsed",
-            "lastTriggerTime",
-            "averageTrigger",
-            "successCount",
-            "errorCount",
-            "skipCount"});
+            "\'lastLag\'",
+            "\'averageLag\'",
+            "\'lastElapsed\'",
+            "\'averageElapsed\'",
+            "\'lastTriggerTime\'",
+            "\'averageTrigger\'",
+            "\'successCount\'",
+            "\'errorCount\'",
+            "\'skipCount\'"});
             this.comboBox_SortBy.Location = new System.Drawing.Point(105, 105);
             this.comboBox_SortBy.Name = "comboBox_SortBy";
             this.comboBox_SortBy.Size = new System.Drawing.Size(220, 25);
@@ -309,6 +341,8 @@ namespace AFUtility_UI01
             // 
             // tabHome
             // 
+            this.tabHome.Controls.Add(this.radioButton3);
+            this.tabHome.Controls.Add(this.radioButton1);
             this.tabHome.Controls.Add(this.tablequeryresults);
             this.tabHome.Controls.Add(this.fieldsReturn);
             this.tabHome.Controls.Add(this.label3);
@@ -340,6 +374,28 @@ namespace AFUtility_UI01
             this.tabHome.UseVisualStyleBackColor = true;
             this.tabHome.Click += new System.EventHandler(this.tabHome_Click);
             // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(378, 63);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(115, 21);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.Text = "Advanced Filter";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(10, 63);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(87, 21);
+            this.radioButton1.TabIndex = 1;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Basic Filter";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
             // tablequeryresults
             // 
             this.tablequeryresults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -350,10 +406,14 @@ namespace AFUtility_UI01
             // 
             // fieldsReturn
             // 
+            this.fieldsReturn.ForeColor = System.Drawing.Color.Silver;
             this.fieldsReturn.Location = new System.Drawing.Point(510, 138);
             this.fieldsReturn.Name = "fieldsReturn";
             this.fieldsReturn.Size = new System.Drawing.Size(309, 25);
             this.fieldsReturn.TabIndex = 22;
+            this.fieldsReturn.Text = "name path lastLag lastTriggerTime id";
+            this.fieldsReturn.Enter += new System.EventHandler(this.fieldsReturn_Enter);
+            this.fieldsReturn.Leave += new System.EventHandler(this.fieldsReturn_Leave);
             // 
             // label3
             // 
@@ -377,11 +437,15 @@ namespace AFUtility_UI01
             // 
             // queryAFSearchbox
             // 
+            this.queryAFSearchbox.ForeColor = System.Drawing.Color.Silver;
             this.queryAFSearchbox.Location = new System.Drawing.Point(510, 107);
             this.queryAFSearchbox.Name = "queryAFSearchbox";
             this.queryAFSearchbox.Size = new System.Drawing.Size(309, 25);
             this.queryAFSearchbox.TabIndex = 19;
+            this.queryAFSearchbox.Text = "status: \'Running\' lastLag:> 5000 maxCount: 5";
             this.queryAFSearchbox.TextChanged += new System.EventHandler(this.QueryAFSearch);
+            this.queryAFSearchbox.Enter += new System.EventHandler(this.queryAFSearchbox_Enter);
+            this.queryAFSearchbox.Leave += new System.EventHandler(this.queryAFSearchbox_Leave);
             // 
             // groupBox2
             // 
@@ -391,7 +455,6 @@ namespace AFUtility_UI01
             this.groupBox2.Size = new System.Drawing.Size(452, 105);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Advanced Filter";
             // 
             // tabPreview
             // 
@@ -827,6 +890,7 @@ namespace AFUtility_UI01
             this.Text = "AnalysisSearch";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
             this.tabHome.PerformLayout();
@@ -932,6 +996,9 @@ namespace AFUtility_UI01
         private System.Windows.Forms.BindingSource programBindingSource1;
         private System.Windows.Forms.DataGridView tablequeryresults;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
 
