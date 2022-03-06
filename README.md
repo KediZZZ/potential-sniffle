@@ -7,7 +7,7 @@ Basic Filter and Advance Filter are selectable via the Radio Button(s)<br>
 Basic Filter is checked/selected by default<br>
 At least one has to be checked/selected at all times<br>
 
-2. All forms has been populated with placeholder<br>
+2. All forms have been populated with placeholder<br>
 The placeholder is also act as a default value (as we all as an example how to fill the forms)<br>
 When user fill in the respective forms, the user input will be taken instead of the placeholder<br>
 
