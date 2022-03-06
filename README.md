@@ -27,6 +27,6 @@ Comment:<br>
 
 I think there are still many way to break the code, especially we purposely find way to break it<br>
 
-But at least if user wanted to execute the code, now it should be much easier to use, user should be able to execute the 'Search' button without doing any input at all
+But if the user actually want to use the utility, now it should be much easier to use, user should be able to execute the 'Search' button without doing any input at all
 
 
