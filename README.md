@@ -23,7 +23,7 @@ Note:<br>
 -This is not affecting the 'Test Connection' behavior, it will still pop up with a Message Box if empty<br>
 
 Comment:<br>
-1. For the Basic Filter, realistcally I think it will be very seldom for user to use 'Path'? Will it be much common to use 'lastLag' for example (as user will be interested to find analysis with high lag)? I have not change it though..<br>
+1. For the Basic Filter, realistically I think it will be very seldom for user to use 'Path'? Will it be much common to use 'lastLag' for example (as user will be interested to find analysis with high lag)? I have not change it though..<br>
 
 I think there are still many way to break the code, especially we purposely find way to break it<br>
 
