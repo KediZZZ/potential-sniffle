@@ -25,7 +25,7 @@ Note:<br>
 Comment:<br>
 1. For the Basic Filter, realistcally I think it will be very seldom for user to use 'Path'? Will it be much common to use 'lastLag' for example (as user will be interested to find analysis with high lag)? I have not change it though..<br>
 
-I think there are still many way to break the code, especially we purposedly find way to break it<br>
+I think there are still many way to break the code, especially we purposely find way to break it<br>
 
 But at least if user wanted to execute the code, with those quality of life improvements, it should be easier to use, user should be able to execute the 'Search' button without doing any input at all<br>
 
