@@ -20,7 +20,7 @@ Changed the flow slightly:<br>
 -The code then continue to run and execute with the default AF Server being used (user dont need to press the 'Search' button again)<br>
 Note:<br>
 -If the code can't find the default AF Server, it will most likely still throw an exception<br>
--This is not affecting the 'Test Connection' behaviour, it will still pop up with a Message Box if empty<br>
+-This is not affecting the 'Test Connection' behavior, it will still pop up with a Message Box if empty<br>
 
 Comment:<br>
 1. For the Basic Filter, realistcally I think it will be very seldom for user to use 'Path'? Will it be much common to use 'lastLag' for example (as user will be interested to find analysis with high lag)? I have not change it though..<br>
