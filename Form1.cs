@@ -52,6 +52,8 @@ namespace AFUtility_UI01
         {
             tablequeryresults.Rows.Clear();
 
+            //Gary: originally is using "AFServerName.Text", changed it into "AnalysisQ.AFServerName"
+            //both are working fine, but since we have already assigned the text into variable, should be using it
             PISystems AFServers = new PISystems();
             var AFServer = AFServers[AnalysisQ.AFServerName];
 
@@ -64,8 +66,6 @@ namespace AFUtility_UI01
                 //return; // return because we don't want to run normal code of button click
             }
 
-            //Gary: originally is using "AFServerName.Text", changed it into "AnalysisQ.AFServerName"
-            //both are working fine, but since we have already assigned the text into variable, should be using it
             var analysisService = AFServer.AnalysisService;
 
 
@@ -79,7 +79,7 @@ namespace AFUtility_UI01
             //as the Basic Filters cant specify the fields value, we need to define the fields with some default value
             //might as well define the query with default value as well
             var query = "status: 'Running', 'Error' lastLag:> 5000 maxCount: 5";
-            var fields = "name path lastLag lastTriggerTime id";
+            var fields = "name path status lastLag lastTriggerTime id";
 
             if (radioButton1.Checked)
             {
@@ -224,48 +224,13 @@ namespace AFUtility_UI01
                 }
             }
         }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tabHome_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+ 
         private void comboBox_SortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Gary this was empty, I'm thinking to delete this
             //until I realized we can use this to trigger the ForeColor change
             //its triggered when user press
             //comboBox_SortBy.ForeColor = Color.Black;
-        }
-
-        private void QueryAFSearch(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -380,12 +345,20 @@ namespace AFUtility_UI01
 
         private void fieldsReturn_Enter(object sender, EventArgs e)
         {
-
+            if (fieldsReturn.Text == "name path status lastLag lastTriggerTime id")
+            {
+                fieldsReturn.Text = "";
+                fieldsReturn.ForeColor = Color.Black;
+            }
         }
 
         private void fieldsReturn_Leave(object sender, EventArgs e)
         {
-
+            if (fieldsReturn.Text == "")
+            {
+                fieldsReturn.Text = "name path status lastLag lastTriggerTime id";
+                fieldsReturn.ForeColor = Color.Silver;
+            }
         }
     }
 }
