@@ -120,6 +120,7 @@ namespace AFUtility_UI01
             {
                 List<string> listTableRow = new List<string>();
 
+                // Lee: change to use foreach
                 foreach(var element in result)
                 { 
                     listTableRow.Add(element);
