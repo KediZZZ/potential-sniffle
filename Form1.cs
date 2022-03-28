@@ -92,7 +92,7 @@ namespace AFUtility_UI01
                 fields = fieldsReturn.Text; // "path lastLag lastTriggerTime";
             }
 
-            IEnumerable<IList<RuntimeFieldValue>> result = analysisService.QueryRuntimeInformation(query, fields);
+            IEnumerable<IList<RuntimeFieldValue>> results = analysisService.QueryRuntimeInformation(query, fields);
 
             // For dataView table
             List<string> fieldlist = fields.Split(' ').ToList();
@@ -116,17 +116,17 @@ namespace AFUtility_UI01
             }
 
             // Populate the rows.
-            foreach (var ab in result)
+            foreach (var result in results)
             {
-                List<string> listab = new List<string>();
+                List<string> listTableRow = new List<string>();
 
-                for (int j = 0; j < ab.Count; j++)
-                {
-                    listab.Add(ab[j]);
+                foreach(var element in result)
+                { 
+                    listTableRow.Add(element);
                 }
                 // Original code but is hardcoded to 4 elements
                 // string[] row = new string[] { ab[0], ab[1], ab[2], ab[3] };
-                tablequeryresults.Rows.Add(listab.ToArray());
+                tablequeryresults.Rows.Add(listTableRow.ToArray());
             }
         }
         private void exportCSV_Click(object sender, EventArgs e)
