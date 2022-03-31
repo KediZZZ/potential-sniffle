@@ -59,7 +59,6 @@ namespace AFUtility_UI01
 
             if (AFServerName.Text.Trim() == string.Empty)
             {
-                //Gary: 
                 AFServer = AFServers.DefaultPISystem;
                 AFServerName.Text = AFServer.Name;
                 MessageBox.Show("AF Server Name is empty. Default AF Server will be used: " + AFServerName.Text, "Info", MessageBoxButtons.OK);
@@ -69,7 +68,7 @@ namespace AFUtility_UI01
             var analysisService = AFServer.AnalysisService;
 
 
-            //Gary: just listing the options can be used in the "query":
+            //Gary: just listing the options can be used in the "query" below here:
             //System.InvalidOperationException: 'Invalid query: Unsupported field 'XXX'. Only 'id, name, category, description,
             //elementname, template, path, status, statusdetail, lastevaluationstatus, lastevaluationstatusdetail, lastlag, averagelag,
             //lastelapsed, averageelapsed, lasttriggertime, averagetrigger, successcount, errorcount, skipcount, sortby, sortorder, maxcount' are supported..'
@@ -78,7 +77,7 @@ namespace AFUtility_UI01
             //we need to define the variables for query and fields outside the if-else
             //as the Basic Filters cant specify the fields value, we need to define the fields with some default value
             //might as well define the query with default value as well
-            var query = "status: 'Running', 'Error' lastLag:> 5000 maxCount: 5";
+            var query = "status :in ('Running', 'Error') lastLag:> 5000 maxCount: 5";
             var fields = "name path status lastLag lastTriggerTime id";
 
             if (radioButton1.Checked)
@@ -240,8 +239,8 @@ namespace AFUtility_UI01
             comboBox_SortBy.SelectedIndex = 0;
             //Gary: because of the above line, the DropDown trigger is also being triggered
             //and so it will replace whatever the default properties with Black
-            //in order to override that added line below to change the color to Silver
-            //in this case the default ForeColor property dont matter
+            //in order to override that, added below line to change the color to Silver
+            //in this case the default comboBox property's ForeColor dont matter
             comboBox_SortBy.ForeColor = Color.Silver;
         }
 
